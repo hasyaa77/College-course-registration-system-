@@ -1,0 +1,49 @@
+/Team members:
+/Gunana Divya Varshini (20251501070)
+/Kolipaka Hasya (20251501091)
+/Swati Dafda (20251501050)
+
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor Student
+actor Faculty
+actor HOD
+actor Administrator
+actor Advisor
+actor "Payment Gateway" as PG
+
+rectangle "College Course Registration System" {
+  usecase "Login" as UC1
+  usecase "View Available Courses" as UC2
+  usecase "Register for Course" as UC3
+  usecase "Drop Course" as UC4
+  usecase "Make Payment" as UC5
+  usecase "Check Registration Status" as UC6
+  usecase "Approve Registration" as UC7
+  usecase "Manage Courses" as UC8
+  usecase "Generate Registration Slip" as UC9
+  usecase "Register Backlog Course" as UC10
+}
+
+Student --> UC1
+Student --> UC2
+Student --> UC3
+Student --> UC4
+Student --> UC6
+Student --> UC9
+
+Faculty --> UC2
+Faculty --> UC7
+HOD --> UC7
+Administrator --> UC8
+Advisor --> UC7
+PG --> UC5
+
+UC3 ..> UC5 : <<include>>
+UC3 ..> UC6 : <<include>>
+UC10 ..> UC3 : <<extend>>\n[if student has backlog]
+
+@enduml
+

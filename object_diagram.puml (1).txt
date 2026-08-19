@@ -1,0 +1,73 @@
+//Team members:
+//Gunana Divya Varshini (20251501070)
+//Kolipaka Hasya (20251501091)
+//Swati Dafda (20251501050)
+
+@startuml CollegeCourseRegistration_ObjectDiagram
+skinparam backgroundColor #FFFFFF
+skinparam object {
+  BackgroundColor #F5F8FF
+  BorderColor #2B5EA8
+  FontColor #1A1A1A
+  ArrowColor #2B5EA8
+}
+skinparam defaultFontSize 13
+
+title College Course Registration System — Object Diagram\n(Sample runtime snapshot)
+
+object "amit : Student" as student1 {
+  studentId = "S2026-1042"
+  name = "Amit Rao"
+  loginStatus = "logged in"
+}
+
+object "advisor1 : Advisor" as advisor1 {
+  advisorId = "A-118"
+  name = "Dr. Fernandes"
+  department = "Computer Science"
+}
+
+object "accountant1 : Accountant" as accountant1 {
+  accountantId = "ACC-07"
+  name = "P. Nair"
+}
+
+object "cs301 : Course" as course1 {
+  courseCode = "CS301"
+  courseName = "Database Systems"
+  department = "Computer Science"
+  seatsAvailable = 24
+  eligibilityRule = "Passed CS201"
+}
+
+object "reg1 : Registration" as reg1 {
+  registrationId = "REG-8891"
+  status = "pending"
+  isBacklog = false
+  requestedOn = "2026-08-18"
+}
+
+object "pay1 : Payment" as pay1 {
+  paymentId = "PAY-5521"
+  amountDue = 45000.00
+  method = "Credit Card"
+  status = "successful"
+}
+
+object "gateway1 : PaymentGateway" as gateway1 {
+  transactionId = "TXN-99213"
+  responseCode = "SUCCESS"
+}
+
+' -------- Relationships (links between objects) --------
+student1 --> reg1 : submits
+reg1 --> course1 : registers for
+reg1 --> advisor1 : awaiting approval from
+advisor1 --> reg1 : reviews / approves
+
+student1 --> pay1 : initiates
+pay1 --> gateway1 : processed via
+pay1 --> accountant1 : verified by
+accountant1 --> student1 : unlocks registration for
+
+@enduml

@@ -1,0 +1,92 @@
+//Team members:
+//Gunana Divya Varshini (20251501070)
+//Kolipaka Hasya (20251501091)
+//Swati Dafda (20251501050)
+
+@startuml class-diagram
+skinparam classAttributeIconSize 0
+
+class Student {
+  - studentId: String
+  - name: String
+  - department: String
+  - email: String
+  --
+  + login(): void
+  + viewCourses(): List
+  + selectCourse(courseId: String): void
+  + registerBacklog(courseId: String): void
+  + initiatePayment(amount: double): void
+  + viewStatus(): String
+}
+
+class Advisor {
+  - advisorId: String
+  - name: String
+  - department: String
+  --
+  + login(): void
+  + viewPendingRegistrations(): List
+  + approveRegistration(regId: String): void
+  + rejectRegistration(regId: String, reason: String): void
+}
+
+class Accountant {
+  - accountantId: String
+  - name: String
+  --
+  + verifyPayment(paymentId: String): boolean
+}
+
+class PaymentGateway {
+  - gatewayId: String
+  - transactionRef: String
+  --
+  + processTransaction(amount: double): boolean
+  + sendResponse(): String
+}
+
+class Course {
+  - courseId: String
+  - courseName: String
+  - department: String
+  - totalSeats: int
+  - availableSeats: int
+  --
+  + checkSeatAvailability(): boolean
+  + updateSeatCount(): void
+}
+
+class Registration {
+  - registrationId: String
+  - status: String
+  - isBacklog: boolean
+  - rejectionReason: String
+  - dateRegistered: Date
+  --
+  + submit(): void
+  + updateStatus(status: String): void
+  + notifyStudent(): void
+}
+
+class Payment {
+  - paymentId: String
+  - amount: double
+  - method: String
+  - status: String
+  - confirmationCode: String
+  --
+  + recordPayment(): void
+  + updateStatus(status: String): void
+  + generateConfirmation(): String
+}
+
+Student "1" -- "0..*" Registration : submits >
+Registration "0..*" -- "1" Course : for >
+Registration "0..*" -- "0..1" Advisor : approved by >
+Student "1" -- "0..*" Payment : makes >
+Payment "0..*" -- "1" Accountant : verified by >
+Payment "1" -- "1" PaymentGateway : processed via >
+
+@enduml
+
