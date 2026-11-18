@@ -1,0 +1,18 @@
+<div class="brand">
+  <div class="big">🎓</div>
+  <h2>Course Registration Portal</h2>
+  <p>Pay · Verify · Register · Get Approved</p>
+</div>
+<div class="card login">
+  <h2>Login</h2>
+  <form method="post" action="/login" style="display:block">
+    <input name="uid" placeholder="User ID (e.g. S101)" style="width:100%;margin-bottom:10px">
+    <input name="pw" type="password" placeholder="Password" style="width:100%;margin-bottom:10px">
+    <button style="width:100%">Login</button>
+  </form>
+  {{ERROR}}
+  <p class="mu">Demo accounts (password 1234):<br>
+    Student: S101 (Sem 3), S102 (Sem 5)<br>
+    Advisor: A01 · Accountant: AC01 · HOD: H01 · Admin: AD01</p>
+  <form method="get" action="/confirm-reset"><button class="g s">Reset demo data</button></form>
+</div>
